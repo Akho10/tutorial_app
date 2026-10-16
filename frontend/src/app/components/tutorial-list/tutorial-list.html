@@ -1,0 +1,107 @@
+<div class="list">
+
+  <div class="input-group">
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by title"
+      [(ngModel)]="title"
+    />
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="searchTitle()">
+      Search
+    </button>
+
+  </div>
+
+
+  <h4>Tutorials List</h4>
+
+
+  <ul class="list-group">
+
+    @for (tutorial of tutorials(); track tutorial.id; let i = $index) {
+
+      <li
+        class="list-group-item"
+        [class.active]="i === currentIndex"
+        (click)="setActiveTutorial(tutorial, i)">
+
+        {{ tutorial.title }}
+
+      </li>
+
+    } @empty {
+
+      <li class="list-group-item">
+        No tutorials found.
+      </li>
+
+    }
+
+  </ul>
+
+
+  <button
+    type="button"
+    class="btn btn-danger"
+    (click)="removeAllTutorials()">
+
+    Remove All
+
+  </button>
+
+
+  @if (currentTutorial) {
+
+    <div class="tutorial-details">
+
+      <h4>Tutorial</h4>
+
+      <div>
+        <strong>ID:</strong>
+        {{ currentTutorial.id }}
+      </div>
+
+      <div>
+        <strong>Title:</strong>
+        {{ currentTutorial.title }}
+      </div>
+
+      <div>
+        <strong>Description:</strong>
+        {{ currentTutorial.description }}
+      </div>
+
+      <div>
+        <strong>Status:</strong>
+
+        @if (currentTutorial.published) {
+          Published
+        } @else {
+          Pending
+        }
+
+      </div>
+
+      <a
+        class="btn btn-warning"
+        [routerLink]="['/tutorials', currentTutorial.id]">
+
+        Edit
+
+      </a>
+
+    </div>
+
+  } @else {
+
+    <p>Select a tutorial to view its details.</p>
+
+  }
+
+</div>

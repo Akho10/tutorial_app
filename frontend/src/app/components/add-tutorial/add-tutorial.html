@@ -1,0 +1,55 @@
+<div class="submit-form">
+
+  @if (!submitted) {
+
+    <div class="form-group">
+      <label for="title">Title</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        required
+        [(ngModel)]="tutorial.title"
+        name="title"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        required
+        [(ngModel)]="tutorial.description"
+        name="description"
+      />
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="saveTutorial()">
+      Submit
+    </button>
+
+  } @else {
+
+    <div>
+      <h4>Tutorial was submitted successfully!</h4>
+
+      <p>Generated ID: {{ tutorial.id }}</p>
+
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="newTutorial()">
+        Add Another
+      </button>
+    </div>
+
+  }
+
+</div>
