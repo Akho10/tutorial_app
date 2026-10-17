@@ -1,0 +1,13 @@
+services:
+  db:
+    ports:
+      - "127.0.0.1:13306:3306"
+
+  api:
+    network_mode: host
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:13306/${MYSQL_DATABASE}
+
+  frontend:
+    extra_hosts:
+      - "api:host-gateway"

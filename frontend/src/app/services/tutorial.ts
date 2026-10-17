@@ -11,8 +11,7 @@ export class TutorialService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly baseUrl =
-    'http://localhost:8080/api/tutorials';
+  private readonly baseUrl = '/api/tutorials';
 
 
   getAll(): Observable<Tutorial[]> {
