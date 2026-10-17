@@ -1,0 +1,20 @@
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      host: unix:///var/run/docker.sock
+      hints.enabled: false
+      templates:
+        - condition:
+            equals:
+              docker.container.labels.com.docker.compose.project: tutorial-app
+          config:
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+
+processors:
+  - add_docker_metadata:
+      host: unix:///var/run/docker.sock
+
+output.logstash:
+  hosts: ["${LOGSTASH_HOST}:5044"]
